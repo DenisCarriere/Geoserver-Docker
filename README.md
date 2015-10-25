@@ -1,6 +1,17 @@
 Geoserver
 =========
 
+Daemonize the Geoserver application using the `-d` flag.
+
+```bash
+$ mkdir ~/geoserver_data
+$ docker run -d \
+    -p 8080:8080 \
+    -v ~/geoserver_data:/opt/geoserver/data_dir \
+    --name geoserver \
+    deniscarriere/geoserver
+```
+
 Set up your Nginx configuration
 
 ```conf
@@ -22,15 +33,4 @@ Run Nginx to point to your Geoserver
 docker run -d \
     -p 80:80  \
     nginx
-```
-
-Daemonize the Geoserver application using the `-d` flag.
-
-```bash
-$ mkdir ~/geoserver_data
-$ docker run -d \
-    -p 8080:8080 \
-    -v ~/geoserver_data:/opt/geoserver/data_dir \
-    --name geoserver \
-    addxy/geoserver
 ```

@@ -44,7 +44,6 @@ RUN apt-get -qq update \
     software-properties-common
 
 # Get ECW
-ENV HEXAGON_DIR /hexagon
 RUN wget -c https://s3-us-west-2.amazonaws.com/pacgeo/SDK/ERDAS-ECW_JPEG_2000_SDK-5.2.1.zip -O ~/ecw.zip && \
     unzip ~/ecw.zip -d $ECW_DIR && \
     rm ~/ecw.zip
@@ -54,6 +53,7 @@ RUN wget -c https://s3-us-west-2.amazonaws.com/pacgeo/SDK/MrSID_DSDK-9.1.0.4045-
     unzip ~/mrsid.zip -d $MRSID_DIR && \
     rm ~/mrsid.zip
 
+# Build GDAL from source
 ENV GDAL_VERSION 1.11.1
 
 RUN mkdir -p /usr/local/src \
@@ -80,7 +80,6 @@ RUN ./configure \
 && make \
 && make install \
 && ldconfig
-
 
 # Install Geoserver
 ENV GEOSERVER_HOME /opt/geoserver

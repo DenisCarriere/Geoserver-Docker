@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER winsent<pipetc@gmail.com>
+MAINTAINER Denis Carriere<carriere.denis@gmail.com>
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -9,6 +9,7 @@ ENV JAVA_HOME /usr
 ENV GDAL_DATA $GDAL_PATH/1.11
 ENV PATH $GDAL_PATH:$PATH
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/lib/jni:/usr/share/java
+ENV GEOSERVER_DATA_DIR
 
 RUN export DEBIAN_FRONTEND=noninteractive
 RUN dpkg-divert --local --rename --add /sbin/initctl
@@ -28,39 +29,20 @@ RUN \
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
-# Get native JAI and ImageIO
-RUN \
-    cd $JAVA_HOME && \
-    wget http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jdk.bin && \
-    echo "yes" | sh jai-1_1_3-lib-linux-amd64-jdk.bin && \
-    rm jai-1_1_3-lib-linux-amd64-jdk.bin
-
-RUN \
-    cd $JAVA_HOME && \
-    export _POSIX2_VERSION=199209 &&\
-    wget http://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jdk.bin && \
-    echo "yes" | sh jai_imageio-1_1-lib-linux-amd64-jdk.bin && \
-    rm jai_imageio-1_1-lib-linux-amd64-jdk.bin
-
 #
 # GEOSERVER INSTALLATION
 #
-ENV GEOSERVER_VERSION 2.8.0
+ENV GEOSERVER_VERSION 2.7.3
 
 # Get GeoServer
 RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-bin.zip -O ~/geoserver.zip &&\
     unzip ~/geoserver.zip -d /opt && mv -v /opt/geoserver* /opt/geoserver && \
     rm ~/geoserver.zip
 
-# Get OGR WFS plugin
-RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O ~/geoserver-ogr-wfs-plugin.zip &&\
-    unzip -o ~/geoserver-ogr-wfs-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
-    rm ~/geoserver-ogr-wfs-plugin.zip
-
-# Get OGR WPS plugin
-RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wps-plugin.zip -O ~/geoserver-ogr-wps-plugin.zip &&\
-    unzip -o ~/geoserver-ogr-wps-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
-    rm ~/geoserver-ogr-wps-plugin.zip
+# Get OGR plugin
+RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-plugin.zip -O ~/geoserver-ogr-plugin.zip &&\
+    unzip -o ~/geoserver-ogr-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
+    rm ~/geoserver-ogr-plugin.zip
     
 # Get GDAL plugin
 RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O ~/geoserver-gdal-plugin.zip &&\
@@ -76,10 +58,6 @@ RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSER
 RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-importer-plugin.zip -O ~/geoserver-importer-plugin.zip &&\
     unzip -o ~/geoserver-importer-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
     rm ~/geoserver-importer-plugin.zip
-
-# Replace GDAL Java bindings
-RUN rm -rf $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar
-RUN cp /usr/share/java/gdal.jar $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar
 
 # Expose GeoServer's default port
 EXPOSE 8080

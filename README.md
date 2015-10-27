@@ -22,6 +22,30 @@ $ docker run -d \
     deniscarriere/geoserver
 ```
 
+GDAL
+----
+
+How imagery metadata using **GDALInfo** on a MrSid file.
+
+```bash
+docker run -it -v $(pwd):/data klokantech/gdal gdalinfo Brockville_2cm_Orthomosaic.sid
+```
+
+How to create a TMS using **GDAL2Tiles.py** on a MrSid file.
+
+```bash
+docker run -it -v $(pwd):/data klokantech/gdal \
+  gdal2tiles.py \
+  -z 15-19 \
+  -s EPSG:32618 \
+  Brockville_2cm_Orthomosaic.sid \
+  /www/brockville```
+
+- `-z` Zoom Levels
+- `-s` Source input projection
+- `input` Input files
+- `output` Output folder
+
 Nginx
 -----
 

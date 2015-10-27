@@ -40,6 +40,7 @@ docker run -it -v $(pwd):/data klokantech/gdal \
   -s EPSG:32618 \
   Brockville_2cm_Orthomosaic.sid \
   /www/brockville```
+```
 
 - `-z` Zoom Levels
 - `-s` Source input projection

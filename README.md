@@ -39,7 +39,7 @@ docker run -it -v $(pwd):/data klokantech/gdal \
   -z 15-19 \
   -s EPSG:32618 \
   Brockville_2cm_Orthomosaic.sid \
-  /www/brockville```
+  /www/brockville
 ```
 
 - `-z` Zoom Levels

@@ -14,10 +14,14 @@ Getting Started
 Download some data from your Amazon S3 buckets
 
 ```bash
-$ mkdir /data/source
-$ cd /data/source
+$ mkdir -p /data/imagery
+$ cd /data/imagery
 $ wget https://s3-us-west-2.amazonaws.com/<FILE PATH>.sid
 $ wget https://s3-us-west-2.amazonaws.com/<FILE PATH>.ecw
+
+$ mkdir -p /data/vector
+$ cd /data/vector
+$ wget https://s3-us-west-2.amazonaws.com/<FILE PATH>.geojson
 ```
 
 Run your geoserver on port 8080 and mount to your `data_dir`.
@@ -27,6 +31,8 @@ $ mkdir /data/geoserver
 $ docker run -d \
     -p 8080:8080 \
     -v /data/geoserver:/opt/geoserver/data_dir \
+    -v /data/imagery:/opt/geoserver/data_dir/imagery \
+    -v /data/vector:/opt/geoserver/data_dir/vector \
     --name geoserver \
     deniscarriere/geoserver
 ```

@@ -61,6 +61,32 @@ TMS Resolution
 |  9         |  1:1 Million   |  305 m           |
 |  7         |  1:4 Million   |  1.2 km          |
 
+Amazon S3
+---------
+
+### Permissions
+
+```json
+{
+  "Version": "2012-10-17",
+  "Id": "S3PolicyId1",
+  "Statement": [
+    {
+      "Sid": "IPAllow",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::pacgeo/*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "52.24.20.105/24"
+        }
+      }
+    }
+  ]
+}
+```
+
 Nginx
 -----
 

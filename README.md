@@ -110,7 +110,7 @@ Set up your Nginx configuration in `/etc/nginx/sites-available/geoserver`.
 ```conf
 server {
     listen  80;
-    server_name  example.com www.example.com;
+    server_name  addxy.com www.addxy.com;
     location / {
         proxy_pass  http://127.0.0.1:8080/;
     }
@@ -118,7 +118,11 @@ server {
 
 server {
     listen  80;
-    server_name  tile.example.com www.tile.example.com;
+    server_name  
+        tile.addxy.com www.tile.addxy.com
+        a.tile.addxy.com www.a.tile.addxy.com
+        b.tile.addxy.com www.b.tile.addxy.com
+        c.tile.addxy.com www.c.tile.addxy.com;
     root /data/tile;
 }
 

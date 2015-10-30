@@ -11,13 +11,22 @@ Geoserver Dockerfile with GDAL bindings which include:
 Getting Started
 ---------------
 
-Run your geoserver on port 8080 and mount your `data_dir`.
+Download some data from your Amazon S3 buckets
 
 ```bash
-$ mkdir ~/geoserver_data
+$ mkdir /data/source
+$ cd /data/source
+$ wget https://s3-us-west-2.amazonaws.com/<FILE PATH>.sid
+$ wget https://s3-us-west-2.amazonaws.com/<FILE PATH>.ecw
+```
+
+Run your geoserver on port 8080 and mount to your `data_dir`.
+
+```bash
+$ mkdir /data/geoserver
 $ docker run -d \
     -p 8080:8080 \
-    -v ~/geoserver_data:/opt/geoserver/data_dir \
+    -v /data/geoserver:/opt/geoserver/data_dir \
     --name geoserver \
     deniscarriere/geoserver
 ```
@@ -99,6 +108,12 @@ server {
     location / {
         proxy_pass  http://127.0.0.1:8080/;
     }
+}
+
+server {
+    listen  80;
+    server_name  tile.example.com www.tile.example.com;
+    root /data/tile;
 }
 
 proxy_set_header Host $host;

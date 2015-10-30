@@ -42,6 +42,25 @@ gdal2tiles.py -z 0-13 Brockville.sid /www/brockville/
 - `input` Input files
 - `output` Output folder
 
+
+TMS Resolution
+--------------
+
+| Zoom Level |     Scale      | Pixel Resolution |
+|:-----------|:---------------|:----------------:|
+|  22        |  1:125         |  3.5 cm          |
+|  21        |  1:250         |  7 cm            |
+|  20        |  1:500         |  15 cm           |
+|  19        |  1:1,000       |  30 cm           |
+|  18        |  1:2,000       |  60 cm           |
+|  17        |  1:4,000       |  1.2 m           |
+|  16        |  1:8,000       |  2.4 m           |
+|  14        |  1:35,000      |  10 m            |
+|  11        |  1:250,000     |  76 m            |
+|  10        |  1:500,000     |  153 m           |
+|  9         |  1:1 Million   |  305 m           |
+|  7         |  1:4 Million   |  1.2 km          |
+
 Nginx
 -----
 

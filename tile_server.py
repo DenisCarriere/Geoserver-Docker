@@ -39,7 +39,7 @@ def tms(basemap, zoom, x, y, ext):
 
     # Success
     else:
-        return send_file(tile)
+        return send_file(tile, mimetype='image/png')
 
 
 if __name__ == "__main__":

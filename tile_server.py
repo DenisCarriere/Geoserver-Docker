@@ -20,7 +20,7 @@ def tms(basemap, zoom, x, y, ext):
         'zoom': zoom,
         'ext': ext
     }
-    tile = "/data/tile/{basemap}/{zoom}/{x}/{y}{ext}".format(**info)
+    tile = "/data/tile/{basemap}/{zoom}/{x}/{google_y}{ext}".format(**info)
 
     # Validate User
     key = request.args.get('api_key')

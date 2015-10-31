@@ -130,3 +130,21 @@ proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ```
+
+## Tile Server
+
+Tile server will convert the OSGeo tile schema to Google Maps/OpenStreetMap schema.
+
+Run the `tile_server.py` using Gunicorn
+
+```bash
+$ gunicorn -w 4 -b 127.0.0.1:5000 tile_server:app
+
+2015-10-31 00:49:44 [10011] [INFO] Starting gunicorn 17.5
+2015-10-31 00:49:44 [10011] [INFO] Listening at: http://127.0.0.1:5000 (10011)
+2015-10-31 00:49:44 [10011] [INFO] Using worker: sync
+2015-10-31 00:49:44 [10016] [INFO] Booting worker with pid: 10016
+2015-10-31 00:49:44 [10019] [INFO] Booting worker with pid: 10019
+2015-10-31 00:49:44 [10022] [INFO] Booting worker with pid: 10022
+2015-10-31 00:49:44 [10023] [INFO] Booting worker with pid: 10023
+```

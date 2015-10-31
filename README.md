@@ -7,6 +7,18 @@ Geoserver Dockerfile with GDAL bindings which include:
 - MrSID
 - JP2K
 
+TMS REST Points
+---------------
+
+### Brockville Airport
+
+**JOSM**
+
+`tms[22]:http://{switch:a,b,c}.tile.addxy.com/brockville/{zoom}/{x}/{y}.png?api_key=123`
+
+**iD Editor**
+
+`http://{switch:a,b,c}.tile.addxy.com/brockville/{zoom}/{x}/{y}.png?api_key=123`
 
 Getting Started
 ---------------

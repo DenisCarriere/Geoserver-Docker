@@ -160,3 +160,28 @@ $ gunicorn -w 4 -b 127.0.0.1:5000 tile_server:app
 2015-10-31 00:49:44 [10022] [INFO] Booting worker with pid: 10022
 2015-10-31 00:49:44 [10023] [INFO] Booting worker with pid: 10023
 ```
+
+### Tile Mapping Service
+
+#### Brockville Airport
+
+**JOSM**
+
+- tms[22]:http://{switch:a,b,c}.tile.addxy.com/brockville/{zoom}/{x}/{y}.png?api_key=123
+
+**iD Editor**
+
+- http://{switch:a,b,c}.tile.addxy.com/brockville/{zoom}/{x}/{y}.png?api_key=123
+
+
+**Good tile**
+
+- http://tile.addxy.com/brockville/18/75910/94669.png?api_key=123
+
+**Bad credentials**
+
+- http://tile.addxy.com/brockville/18/75910/94669.png?api_key=321
+
+**Missing tile**
+
+- http://a.tile.addxy.com/brockville/24/0/0.png?api_key=123

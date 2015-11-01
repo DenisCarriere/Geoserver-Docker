@@ -25,17 +25,11 @@ def tms(basemap, zoom, x, y, ext):
     # Validate User
     key = request.args.get('api_key')
     if key not in ['123']:
-        msg = info
-        msg['error'] = 'Invalid Credentials'
-        msg['status'] = 401
-        return jsonify(msg)
+        return jsonify({'message': 'Not Authorized - Invalid Token'}), 401
 
     # Check if Tile Exists
     if not os.path.exists(tile):
-        msg = info
-        msg['error'] = 'Tile does not exist'
-        msg['status'] = 404
-        return jsonify(msg)
+        return jsonify({'message': 'Tile does not exists'}), 404
 
     # Success
     else:

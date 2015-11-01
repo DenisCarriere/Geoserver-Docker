@@ -69,6 +69,10 @@ gdal2tiles.py -z 0-13 Brockville.sid /www/brockville/
 - `input` Input files
 - `output` Output folder
 
+How to use the tiling script, gdal2tiles_parallel.py
+
+- https://github.com/GitHubRGI/geopackage-python
+
 
 TMS Resolution
 --------------

@@ -55,13 +55,16 @@ GDAL
 How imagery metadata using **GDALInfo** on a MrSid file.
 
 ```bash
-docker run -t -i -v /data:/data -v /www:/www geodata/gdal /bin/bash
+cd /usr/local/bin
+wget https://github.com/GitHubRGI/geopackage-python/raw/master/Packaging/tiles2gpkg_parallel.py
+wget https://github.com/GitHubRGI/geopackage-python/raw/master/Tiling/gdal2tiles_parallel.py
+docker run -t -i -v /data:/data -v /usr/local/bin/:/usr/local/bin/ geodata/gdal /bin/bash
 ```
 
 How to create a TMS using **GDAL2Tiles.py** on a MrSid file.
 
 ```bash
-gdal2tiles.py -z 0-13 Brockville.sid /www/brockville/
+gdal2tiles.py --zoom 0-13 --srcnodata 0,0,0 Brockville.sid /www/brockville/
 ```
 
 - `-z` Zoom Levels

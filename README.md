@@ -58,8 +58,15 @@ How imagery metadata using **GDALInfo** on a MrSid file.
 cd /usr/local/bin
 wget https://github.com/GitHubRGI/geopackage-python/raw/master/Packaging/tiles2gpkg_parallel.py
 wget https://github.com/GitHubRGI/geopackage-python/raw/master/Tiling/gdal2tiles_parallel.py
-docker run -t -i -v /data:/data -v /usr/local/bin/:/usr/local/bin/ geodata/gdal /bin/bash
+docker run -t -i -v /data:/data -v /usr/local/bin/gdal2tiles_parallel.py:/usr/local/bin/gdal2tiles_parallel.py geodata/gdal /bin/bash
 ```
+
+How to convert a JPEG into a GeoTIFF
+
+```bash
+sudo gdal_translate -co COMPRESS=JPEG DRAPE14.jpg DRAPE14_.geotiff
+```
+
 
 How to create a TMS using **GDAL2Tiles.py** on a MrSid file.
 

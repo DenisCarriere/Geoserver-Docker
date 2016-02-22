@@ -195,7 +195,10 @@ RUN wget -c $GEOSERVER_URL/extensions/geoserver-$GEOSERVER_VERSION-$PLUGIN-plugi
     rm ~/geoserver-$PLUGIN-plugin.zip
 
 # Replace GDAL Java bindings
+RUN ls $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/
+RUN rm -rf $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar
 RUN cp /usr/share/java/gdal.jar $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar
+RUN ls $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/
 
 # Expose GeoServer's default port
 EXPOSE 8080

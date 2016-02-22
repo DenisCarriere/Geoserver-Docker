@@ -1,12 +1,8 @@
 #!/bin/bash
 # Stop existing services
-sudo docker stop geoserver
-sudo docker rm geoserver
-
 # Create Data folders
 mkdir -p $HOME/geoserver/data/imagery \
-				 $HOME/geoserver/data/vector \
-				 $HOME/geoserver
+	 $HOME/geoserver/data/vector \
 
 # Start Docker Geoserver
 sudo docker run -d \

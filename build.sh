@@ -1,5 +1,3 @@
-mkdir -p $HOME/geoserver/data/imagery \
-	 $HOME/geoserver/data/vector \
-	 $HOME/geoserver
-
+#!/bin/bash
+# Build Docker Geoserver
 sudo docker build -t deniscarriere/geoserver .

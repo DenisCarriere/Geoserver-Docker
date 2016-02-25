@@ -1,0 +1,25 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name geoserver.dlcspm.com;
+
+    location / {
+        return 301 http://geoserver.dlcspm.com/geoserver$request_uri;
+    }
+
+    location /geoserver {
+        proxy_pass http://127.0.0.1:8080;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name test.dlcspm.com;
+
+    root /www/data;
+    index index.html;
+}
+
